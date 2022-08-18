@@ -7,6 +7,15 @@ Table of Contents
 {{- range $key, $value := .Assignments }}
   * [{{ $value.Properties.DisplayName }}](#{{ mdlink $value.Properties.DisplayName }})
 {{- end }}
+* [Initiatives](#Initiatives)
+{{- range $key, $value := .UsedDefinitionSets }}
+  * [{{ $value.Properties.DisplayName }}](#{{ mdlink $value.Properties.DisplayName }})
+{{- end }}
+* [Definitions](#Definitions)
+{{- range $key, $value := .UsedDefinitions }}
+  * [{{ $value.Properties.DisplayName }}](#{{ mdlink $value.Properties.DisplayName }})
+{{- end }}
+
 
 ## Managment Groups
 
@@ -21,6 +30,33 @@ Table of Contents
 
 Scope: **{{ $value.Properties.Scope }}**
 
-{{ $value.Properties.Description }}
+> {{ $value.Properties.Description }}
+{{- end }}
+
+## Initiatives
+
+{{- range $key, $value := .UsedDefinitionSets }}
+### {{ $value.Properties.DisplayName }}
+
+> {{ $value.Properties.Description }}
+
+**Policies:**
+
+{{- range $policyKey, $policy := $value.Definitions }}
+
+- **{{ $policy.Properties.DisplayName }}:**
+
+  _{{ $policy.Properties.Description }}_
 
 {{- end }}
+{{- end }}
+
+## Definitions
+
+{{- range $key, $value := .UsedDefinitions }}
+### {{ $value.Properties.DisplayName }}
+
+> {{ $value.Properties.Description }}
+
+{{- end }}
+
